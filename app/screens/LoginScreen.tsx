@@ -1,5 +1,11 @@
-import { Alert, StyleSheet, Text, View } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
+import {
+  Alert,
+  Platform,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from "react-native";
+import React, { useContext, useState } from "react";
 import LinearGradient from "react-native-linear-gradient";
 import { Header } from "../components/Header";
 import Login from "../components/Auth/Login";
@@ -11,6 +17,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function LoginScreen({ navigation }) {
   const [isAuth, setIsAuth] = useState(false);
   const authCtx = useContext(AuthContext);
+  const isIos = Platform.OS == "ios";
+  const { height, width } = useWindowDimensions();
 
   const handleLogin = async ({ email, password }) => {
     setIsAuth(true);
@@ -39,7 +47,9 @@ export default function LoginScreen({ navigation }) {
       end={{ x: 1, y: 1 }}
     >
       <Header text="welcome-screen.login" />
-      <Login onAuthenticate={handleLogin} />
+      <View style={{ marginTop: isIos ? height * 0.2 : height * 0.2 }}>
+        <Login onAuthenticate={handleLogin} />
+      </View>
     </LinearGradient>
   );
 }

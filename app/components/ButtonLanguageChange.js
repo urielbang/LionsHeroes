@@ -1,12 +1,4 @@
-import {
-  FlatList,
-  Image,
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import i18next, { languageResources } from "../services/i18next";

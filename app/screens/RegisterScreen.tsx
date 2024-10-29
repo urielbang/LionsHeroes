@@ -1,4 +1,10 @@
-import { Alert, StyleSheet } from "react-native";
+import {
+  Alert,
+  ScrollView,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import LinearGradient from "react-native-linear-gradient";
 import Register from "../components/Auth/Register";
 import { createUser } from "../utils/api/auth";
@@ -13,6 +19,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function RegisterScreen({ navigation }) {
   const [isAuth, setIsAuth] = useState(false);
   const authCtx = useContext(AuthContext);
+  const { height } = useWindowDimensions();
 
   const handleRegister = async ({ email, password, name }) => {
     setIsAuth(true);
@@ -43,8 +50,12 @@ export default function RegisterScreen({ navigation }) {
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
     >
-      <Header text="welcome-screen.register" />
-      <Register onAuthenticate={handleRegister} />
+      <ScrollView style={{ flex: 1, marginTop: 30 * (height * 0.0025) }}>
+        <View>
+          <Header text="welcome-screen.register" />
+          <Register onAuthenticate={handleRegister} />
+        </View>
+      </ScrollView>
     </LinearGradient>
   );
 }

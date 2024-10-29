@@ -13,13 +13,13 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function WelcomeScreen() {
   const fadeAnim = useRef(new Animated.Value(0)).current;
-  const { height } = useWindowDimensions();
+  const { height, width } = useWindowDimensions();
   const navigation = useNavigation();
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 1000,
+      duration: 500,
       useNativeDriver: true,
     }).start();
   }, [fadeAnim]);
@@ -41,7 +41,10 @@ export default function WelcomeScreen() {
           <ButtonLanguageChange />
         </View>
         <View style={styles.contanerHeader}>
-          <CustomText tx="welcome" style={styles.header} />
+          <CustomText
+            tx="welcome"
+            style={[styles.header, { fontSize: 26 * (width * 0.0025) }]}
+          />
         </View>
         <View style={[styles.containerButtons, { marginTop: height * 0.7 }]}>
           <Button onPress={handleRegisterPress}>welcome-screen.register</Button>
@@ -91,7 +94,6 @@ const styles = StyleSheet.create({
     right: 20,
   },
   header: {
-    fontSize: 27,
     fontWeight: "bold",
     color: "white",
   },

@@ -11,6 +11,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../../constants/styles";
 import CustomText from "../CustomText";
+import i18next from "i18next";
 
 const Input = forwardRef(function Input(
   {
@@ -25,12 +26,19 @@ const Input = forwardRef(function Input(
   ref
 ) {
   const [showPassword, setShowPassword] = useState(false);
-  const { height } = useWindowDimensions();
+  const { height, width } = useWindowDimensions();
   const isIos = Platform.OS === "ios";
+  const currentLanguage = i18next.language;
 
   return (
     <View style={styles.inputContainer}>
-      <Text style={[styles.label, isInvalid && styles.labelInvalid]}>
+      <Text
+        style={[
+          styles.label,
+          isInvalid && styles.labelInvalid,
+          { alignSelf: currentLanguage === "he" ? "flex-start" : "flex-end" },
+        ]}
+      >
         <CustomText tx={label} />
       </Text>
       <View>
@@ -48,7 +56,10 @@ const Input = forwardRef(function Input(
           <TouchableOpacity
             style={[
               styles.eyeIconContainer,
-              { top: !isIos ? height * 0.008 : height * 0.005 },
+              {
+                top: !isIos ? height * 0.013 : height * 0.009,
+                left: currentLanguage === "he" ? width * 0.69 : 0,
+              },
             ]}
             onPress={() => setShowPassword(!showPassword)}
           >

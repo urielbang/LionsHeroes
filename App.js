@@ -9,9 +9,15 @@ import AuthContextProvider from "./app/store/auth.context";
 import HomeLionsScreen from "./app/screens/HomeLionsScreen";
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { I18nManager } from "react-native";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+
+if (!I18nManager.isRTL) {
+  I18nManager.forceRTL(true);
+  RNRestart.Restart();
+}
 
 const RootApp = () => {
   return (
